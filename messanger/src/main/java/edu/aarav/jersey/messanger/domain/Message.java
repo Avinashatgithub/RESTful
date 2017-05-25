@@ -73,5 +73,9 @@ public class Message {
 	public void setComments(Map<Long, Comment> comments) {
 		this.comments = comments;
 	}
+	
+	public void addComment(Comment comment){
+		comments.put(comment.getId(), comment);
+	}
 
 }

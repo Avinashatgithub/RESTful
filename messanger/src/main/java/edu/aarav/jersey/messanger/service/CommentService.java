@@ -27,14 +27,10 @@ public class CommentService {
 
 	public Comment makeComment(long messageId, Comment comment) {
 		Message message = messages.get(messageId);
-		Map<Long, Comment> commentMap = message.getComments();
-		comment.setId(commentMap.size() + 1);
+		comment.setId(message.getComments().size() + 1);
 		comment.setCreated(new Date());
-		commentMap.put(comment.getId(), comment);
-		System.out.println("NO of Comments:"+commentMap.size());
-		Comment result = commentMap.get(comment.getId());
-		System.out.println("NO of Comments:"+commentMap.size());
-		return result;
+		message.addComment(comment);
+		return comment;//message.getComments().get(comment.getId());
 	}
 
 	public Comment updateComment(long messageId, Comment comment) {
