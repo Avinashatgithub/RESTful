@@ -8,6 +8,7 @@ import java.util.Map;
 
 import edu.aarav.jersey.messanger.db.MyDataBase;
 import edu.aarav.jersey.messanger.domain.Message;
+import edu.aarav.jersey.messanger.ext.DataNotFoundException;
 
 public class MessageService {
 	private Map<Long, Message> messages;
@@ -56,7 +57,11 @@ public class MessageService {
 	
 
 	public Message getMessage(Long id) {
-		return messages.get(id);
+		Message message = messages.get(id);
+		if(message == null){
+			throw new DataNotFoundException("Message with id: "+id+" not found");
+		}
+		return message;
 	}
 
 	public Message addMessage(Message message) {

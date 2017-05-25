@@ -18,6 +18,7 @@ public class Message {
 	private String message;
 	private Date created;
 	private String author;
+	
 	private Map<Long, Comment> comments = new HashMap<>();
 
 	public Message() {
@@ -71,6 +72,10 @@ public class Message {
 	
 	public void setComments(Map<Long, Comment> comments) {
 		this.comments = comments;
+	}
+	
+	public void addComment(Comment comment){
+		comments.put(comment.getId(), comment);
 	}
 
 }

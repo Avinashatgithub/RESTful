@@ -1,5 +1,6 @@
 package edu.aarav.jersey.messanger.service;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -17,13 +18,7 @@ public class CommentService {
 	}
 
 	public List<Comment> getAllComments(long messageId) {
-		Message message = messages.get(messageId);
-		Map<Long, Comment> comments = message.getComments();
-		List<Comment> values = (List<Comment>) comments.values();
-
-		return values;
-
-		// return new ArrayList<Comment>(messages.get(messageId).getComments().values());
+		return new ArrayList<Comment>(messages.get(messageId).getComments().values());
 	}
 
 	public Comment getComment(long messageId, String commentId) {
@@ -32,11 +27,10 @@ public class CommentService {
 
 	public Comment makeComment(long messageId, Comment comment) {
 		Message message = messages.get(messageId);
-		Map<Long, Comment> commentMap = message.getComments();
-		comment.setId(commentMap.size() + 1);
+		comment.setId(message.getComments().size() + 1);
 		comment.setCreated(new Date());
-		commentMap.put(comment.getId(), comment);
-		return commentMap.get(comment.getId());
+		message.addComment(comment);
+		return comment;//message.getComments().get(comment.getId());
 	}
 
 	public Comment updateComment(long messageId, Comment comment) {
