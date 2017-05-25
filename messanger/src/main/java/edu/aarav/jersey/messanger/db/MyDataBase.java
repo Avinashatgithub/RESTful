@@ -21,5 +21,4 @@ public class MyDataBase {
 	public static Map<String, Profile> getProfiles() {
 		return profiles;
 	}
-	
 }
