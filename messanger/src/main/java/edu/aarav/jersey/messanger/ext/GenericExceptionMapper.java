@@ -8,13 +8,13 @@ import javax.ws.rs.ext.Provider;
 import edu.aarav.jersey.messanger.domain.ErrorMessage;
 
 @Provider
-public class DataNotFoundMapper implements ExceptionMapper<DataNotFoundException> {
+public class GenericExceptionMapper implements ExceptionMapper<Throwable> {
 
 	@Override
-	public Response toResponse(DataNotFoundException exception) {
-		ErrorMessage errorMessage = new ErrorMessage(404, "Data Not Found", "https://javabrains.io/courses/javaee_jaxrs");
+	public Response toResponse(Throwable ex) {
+
 		return Response.status(Status.NOT_FOUND)
-				.entity(errorMessage)
+				.entity(new ErrorMessage(404, "Requested resource not found.", "http://google.com"))
 				.build();
 	}
 }

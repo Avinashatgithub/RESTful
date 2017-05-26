@@ -6,6 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.WebApplicationException;
+import javax.ws.rs.core.Response;
+
+import edu.aarav.jersey.messanger.domain.ErrorMessage;
 import edu.aarav.jersey.messanger.domain.Profile;
 
 public class ProfileService {
@@ -35,7 +39,17 @@ public class ProfileService {
 	 * Get a particular Profile matching profileName from map
 	 */
 	public Profile getProfile(String profileName) {
-		return profiles.get(profileName);
+		Profile profile = profiles.get(profileName);
+		Response response = Response.status(404)
+				.entity(new ErrorMessage(404, "No Profile found with Profile Name: "+profileName, "https://jersey.github.io/"))
+				.build();
+		if(profile == null){
+			// throw predefined Exception with proper response/information. But it is not recommended to 
+			// use. Because, This is a business service class and this exception handling is simply
+			// a presentation logic, that's not good to couple both at same place.
+			throw new WebApplicationException(response);
+		}
+		return profile;
 	}
 
 	/*
