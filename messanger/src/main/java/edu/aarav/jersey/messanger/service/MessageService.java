@@ -59,6 +59,7 @@ public class MessageService {
 	public Message getMessage(Long id) {
 		Message message = messages.get(id);
 		if(message == null){
+			// Throwing user defined exception.
 			throw new DataNotFoundException("Message with id: "+id+" not found");
 		}
 		return message;
