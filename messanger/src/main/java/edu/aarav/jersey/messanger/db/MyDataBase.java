@@ -6,6 +6,11 @@ import java.util.Map;
 import edu.aarav.jersey.messanger.domain.Message;
 import edu.aarav.jersey.messanger.domain.Profile;
 
+/*
+ *  This class is a kind of In-memory database which will be used to store messenger's
+ *  user's profile and their related data.
+ *  
+ */
 public class MyDataBase {
 	
 	// this map represent mapping of a message with the message id
